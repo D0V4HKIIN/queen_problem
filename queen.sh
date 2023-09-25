@@ -1,1 +1,1 @@
-gcc queen.c -o queen -fopenmp && ./queen
+gcc queen.c -o queen && ./queen
