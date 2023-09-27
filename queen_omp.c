@@ -2,12 +2,10 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#include <stdlib.h>
 #include <omp.h>
 
-#define size 15
-#define no 2 * size
-
-
+int size, no;
 unsigned long sum_num_solutions = 0;
 unsigned long sum_iterations = 0;
 
@@ -112,8 +110,16 @@ void init_resolve(int row)
     }
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+    if(argc == 2){
+        size = atoi(argv[1]);
+    }else{
+        size = 8;
+    }
+    no = 2 * size;
+    printf("using size = %i\n", size);
+
     clock_t start, end;
     double cpu_time_used;
     start = omp_get_wtime();

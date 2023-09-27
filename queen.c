@@ -2,12 +2,11 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#include <stdlib.h>
 #include <omp.h>
 
-#define size 15
-#define no 2 * size
-
-int queens[size]; // [col] = row
+int size, no;
+int *queens; // [col] = row
 unsigned long num_solutions = 0;
 unsigned long iterations = 0;
 
@@ -93,13 +92,25 @@ void resolve(int col)
     queens[col] = no;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+    if(argc == 2){
+        size = atoi(argv[1]);
+    }else{
+        size = 8;
+    }
+    no = 2 * size;
+    printf("using size = %i\n", size);
+
     clock_t start, end;
     double cpu_time_used;
     start = omp_get_wtime();
-    memset(&queens, no, size * sizeof(int));
+
+    queens = malloc(size * sizeof(int));
+    memset(queens, no, size * sizeof(int));
+    
     resolve(0);
+    
     end = omp_get_wtime();
     cpu_time_used = ((double)(end - start));
     printf("%lu solutions\n%lu iterations\ntook %f seconds\n", num_solutions, iterations, cpu_time_used);

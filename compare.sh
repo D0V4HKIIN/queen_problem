@@ -1,6 +1,6 @@
 echo "queen"
 echo ""
-./queen.sh
+./queen.sh $1
 echo "queen omp"
 echo ""
-./queen_omp.sh
+./queen_omp.sh $1
