@@ -4,7 +4,7 @@
 #include <time.h>
 #include <omp.h>
 
-#define size 17
+#define size 15
 #define no 2 * size
 
 
