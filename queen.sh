@@ -1,1 +1,1 @@
-gcc queen.c -o queen -fopenmp && ./queen $1
+gcc queen.c -o bin/queen -fopenmp && ./bin/queen $1

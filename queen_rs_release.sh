@@ -1,0 +1,1 @@
+rustc queen.rs -o bin/queen_rs_release -O && ./bin/queen_rs_release $1
