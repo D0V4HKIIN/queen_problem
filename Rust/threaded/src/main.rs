@@ -38,7 +38,7 @@ fn resolve(
 }
 
 fn init_resolve(
-    i: usize,
+    row: usize,
     size: usize,
     no: usize,
     sum_num_solutions: Arc<Mutex<u64>>,
@@ -48,8 +48,10 @@ fn init_resolve(
     let mut num_solutions: u64 = 0;
     let mut iterations = 1;
 
+    queens[0] = row;
+
     resolve(
-        i,
+        1,
         &mut queens,
         &mut iterations,
         &mut num_solutions,
@@ -92,9 +94,15 @@ fn main() {
     let sum_iterations: Arc<Mutex<u64>> = Arc::new(Mutex::new(0));
 
     let start = Instant::now();
-    (1..size)
-        .into_par_iter()
-        .for_each(|i| init_resolve(i, size, no, Arc::clone(&sum_num_solutions), Arc::clone(&sum_iterations)));
+    (1..size).into_par_iter().for_each(|i| {
+        init_resolve(
+            i,
+            size,
+            no,
+            Arc::clone(&sum_num_solutions),
+            Arc::clone(&sum_iterations),
+        )
+    });
 
     println!(
         "{} solutions\n{} iterations\ntook {:.2?}\n",
