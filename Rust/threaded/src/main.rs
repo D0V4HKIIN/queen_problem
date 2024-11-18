@@ -94,7 +94,7 @@ fn main() {
     let sum_iterations: Arc<Mutex<u64>> = Arc::new(Mutex::new(0));
 
     let start = Instant::now();
-    (1..size).into_par_iter().for_each(|i| {
+    (0..size).into_par_iter().for_each(|i| {
         init_resolve(
             i,
             size,
